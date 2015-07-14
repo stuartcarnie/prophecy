@@ -71,8 +71,9 @@ class ClassCodeGeneratorSpec extends ObjectBehavior
         $argument31->getName()->willReturn('refValue');
         $argument31->getTypeHint()->willReturn(null);
         $argument31->isOptional()->willReturn(false);
-        $argument31->getDefault()->willReturn();
+        $argument31->hasDefault()->willReturn(false);
         $argument31->isPassedByReference()->willReturn(false);
+        $argument31->isVariadic()->willReturn(false);
 
         $code = $this->generate('CustomClass', $class);
         $expected = <<<'PHP'
@@ -125,24 +126,28 @@ PHP;
         $method1->getVisibility()->willReturn('public');
         $method1->isStatic()->willReturn(false);
         $method1->getArguments()->willReturn(array($argument1));
+        $method1->returnsReference()->willReturn(false);
         $method1->getCode()->willReturn('');
 
         $method2->getName()->willReturn('variadicByRef');
         $method2->getVisibility()->willReturn('public');
         $method2->isStatic()->willReturn(false);
         $method2->getArguments()->willReturn(array($argument2));
+        $method2->returnsReference()->willReturn(false);
         $method2->getCode()->willReturn('');
 
         $method3->getName()->willReturn('variadicWithType');
         $method3->getVisibility()->willReturn('public');
         $method3->isStatic()->willReturn(false);
         $method3->getArguments()->willReturn(array($argument3));
+        $method3->returnsReference()->willReturn(false);
         $method3->getCode()->willReturn('');
 
         $method4->getName()->willReturn('variadicWithTypeByRef');
         $method4->getVisibility()->willReturn('public');
         $method4->isStatic()->willReturn(false);
         $method4->getArguments()->willReturn(array($argument4));
+        $method4->returnsReference()->willReturn(false);
         $method4->getCode()->willReturn('');
 
         $argument1->getName()->willReturn('args');
