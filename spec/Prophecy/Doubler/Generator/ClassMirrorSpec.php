@@ -91,6 +91,9 @@ class ClassMirrorSpec extends ObjectBehavior
         $parameter->getDefaultValue()->willReturn(null);
         $parameter->isPassedByReference()->willReturn(false);
         $parameter->getClass()->willReturn($class);
+        if (PHP_VERSION_ID >= 50600) {
+            $parameter->isVariadic()->willReturn(false);
+        }
 
         $classNode = $this->reflect($class, array());
 
@@ -192,6 +195,9 @@ class ClassMirrorSpec extends ObjectBehavior
         $param1->isPassedByReference()->willReturn(false);
         $param1->allowsNull()->willReturn(false);
         $param1->getDefaultValue()->willReturn(array());
+        if (PHP_VERSION_ID >= 50600) {
+            $param1->isVariadic()->willReturn(false);
+        }
 
         $param2->getName()->willReturn('arg2');
         $param2->isArray()->willReturn(false);
@@ -200,6 +206,10 @@ class ClassMirrorSpec extends ObjectBehavior
         $param2->isOptional()->willReturn(false);
         $param2->isPassedByReference()->willReturn(false);
         $param2->allowsNull()->willReturn(false);
+        if (PHP_VERSION_ID >= 50600) {
+            $param2->isVariadic()->willReturn(false);
+        }
+
         $typeHint->getName()->willReturn('ArrayAccess');
 
         $param3->getName()->willReturn('arg_3');
@@ -212,6 +222,10 @@ class ClassMirrorSpec extends ObjectBehavior
         $param3->isDefaultValueAvailable()->willReturn(false);
         $param3->isPassedByReference()->willReturn(false);
         $param3->allowsNull()->willReturn(true);
+        if (PHP_VERSION_ID >= 50600) {
+            $param3->isVariadic()->willReturn(false);
+        }
+
 
         $classNode   = $this->reflect($class, array());
         $methodNodes = $classNode->getMethods();
@@ -268,6 +282,10 @@ class ClassMirrorSpec extends ObjectBehavior
         $param1->isOptional()->willReturn(false);
         $param1->isPassedByReference()->willReturn(false);
         $param1->allowsNull()->willReturn(true);
+        if (PHP_VERSION_ID >= 50600) {
+            $param1->isVariadic()->willReturn(false);
+        }
+
         if (defined('HHVM_VERSION')) {
             $param1->getTypehintText()->willReturn(null);
         }
